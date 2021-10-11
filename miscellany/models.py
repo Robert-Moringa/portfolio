@@ -2,14 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-class GithubRepos(models.Model):
+class GithubRepo(models.Model):
     name = models.TextField(max_length=200, null=True, blank=True, default="name")
     project_landing = models.ImageField(upload_to='Project_images/', null=True, blank=True)
     about = models.TextField()
     project_link=models.URLField(max_length=250)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
-class Skills(models.Model):
+class Skill(models.Model):
     class Meta:
         db_table = 'skills'
 
@@ -23,7 +23,7 @@ class ContactMe(models.Model):
     company_name= models.CharField(max_length=40)
     description=models.TextField()
     email=models.EmailField()
-    skills=models.ForeignKey(Skills, null=True, blank=True, on_delete=models.CASCADE, verbose_name='Which of my skills are you interested in?')
+    skills=models.ForeignKey(Skill, null=True, blank=True, on_delete=models.CASCADE, verbose_name='Which of my skills are you interested in?')
     pub_date = models.DateTimeField(auto_now_add=True)
     
 class Myself(models.Model):
@@ -35,5 +35,5 @@ class Myself(models.Model):
     profile_pic = models.ImageField(upload_to='profile_pic/', null=True, blank=True)
     email= models.EmailField()
     edit_date = models.DateTimeField(auto_now_add=True)
-    skills= models.ForeignKey(Skills, null=True, blank=True, on_delete=models.CASCADE)
-    repos=models.ForeignKey(GithubRepos, null=True, blank=True, on_delete=models.CASCADE)
+    skills= models.ForeignKey(Skill, null=True, blank=True, on_delete=models.CASCADE)
+    repos=models.ForeignKey(GithubRepo, null=True, blank=True, on_delete=models.CASCADE)
