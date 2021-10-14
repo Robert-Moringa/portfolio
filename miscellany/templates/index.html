@@ -1,0 +1,120 @@
+{%extends 'base.html'%}
+{%load static %}
+
+{% block content %}
+{{block.super}}
+{% include 'navbar.html' %}
+{%for profile in myself%}
+<div class="row" style="background-color: rgba(251, 248, 246, 1);color: rgba(17, 34, 0, 1); font-family: 'Itim', cursive; height: 100%;">
+  <div class="col-md-10">
+
+    <!-- sidenav -->
+    <div class="sidenav" style=" width: 15em; height: 100%;
+    position: fixed;
+    z-index: 1;
+    font-size: 90%;
+    top: 0em;
+    left: 0em;
+    background: rgba(226, 202, 184, 1);
+    overflow-x: hidden;
+    padding: 1em 0;">
+        <img src="{{profile.profile_pic.url}}" class="profile-" style="
+                      width: 70%;
+                      height: 20%;
+                      border-radius: 50%;
+                      overflow: hidden;
+                      padding: 3px;
+                      margin: 2em;
+                      background: linear-gradient(45deg, rgba(251, 248, 246, 1), rgba(186, 83, 33, 1) 80%);
+                  " alt="">
+
+      <div class="buttons text-center">
+        <a href="#about" style="display: block; margin-left: 1em; margin-right: 1em; text-decoration: none; padding: 0.8em; color: rgba(110, 77, 40, 1); font-size: 150%; border-bottom: 2px solid rgba(186, 83, 33, 1);">About</a>
+        <a href="#skills" style="display: block; margin-left: 1em; margin-right: 1em; text-decoration: none; padding: 0.8em; color: rgba(110, 77, 40, 1); font-size: 150%; border-bottom: 2px solid rgba(186, 83, 33, 1);">Skills</a>
+        <a href="#repos" style="display: block; margin-left: 1em; margin-right: 1em; text-decoration: none; padding: 0.8em; color: rgba(110, 77, 40, 1); font-size: 150%; border-bottom: 2px solid rgba(186, 83, 33, 1);">My work</a>
+        <a href="#contact" style="display: block; margin-left: 1em; margin-right: 1em; text-decoration: none; padding: 0.8em; color: rgba(110, 77, 40, 1); font-size: 150%; border-bottom: 2px solid rgba(186, 83, 33, 1);">Contact me</a>
+        
+      </div>
+
+      <div class="text-center" style="margin-top: 5em; margin-bottom: 5em;">
+        <a href="" style="margin-left: 2em; margin-right: 1em; color: rgba(186, 83, 33, 1);"><i class="fa fa-facebook-square" style="font-size: x-large;" aria-hidden="true"></i></a>
+
+        <a href="" style="margin-left: 2em; margin-right: 1em; color: rgba(186, 83, 33, 1);"><i class="fa fa-instagram" style="font-size: x-large;" aria-hidden="true"></i></a>
+
+        <a href="" style="margin-left: 2em; margin-right: 1em; color: rgba(186, 83, 33, 1);"><i class="fa fa-linkedin-square" style="font-size: x-large;" aria-hidden="true"></i></a>
+      </div>
+    </div>
+    
+    <div class="main" style=" margin-left: 16em;
+    font-size: 100%; 
+    padding: 0px 10px;">
+      <div style="margin-top: 16em; margin-left: 5em;">
+        <h1 style="font-size: 500%; color: #6E4D28;">Hi. <br> I am Robert, <br> Web Developer</h1>
+        <hr style="color: #BA5321; height: 3px;">
+        <h2 style="font-family: 'Rubik', sans-serif; color: #6E4D28;">Fullstack Developer</h2>
+      </div>
+  
+      <!-- about -->
+      <div id="about" style="margin-top: 10em; margin-left: 1em;">
+        <h3 class="card-title">About</h3>
+        <p class="card-text">
+          {{profile.about}}
+        </p>
+      </div>
+
+      <!-- skills -->
+  
+      <div id="skills" style="margin-top: 10em; margin-left: 1em;">
+        <h3 class="card-title">My Skills</h3>
+        {%for skill in skills%}
+        <a href="#contact"><button style="background: none; border-radius: 10%;color: rgba(186, 83, 33, 1); border: solid 2px rgba(186, 83, 33, 1);" >{{skill.name}}</button></a>
+       
+        {%endfor%}
+      </div>
+  
+      <!-- repos -->
+  
+      <div id="repos" style="margin-top: 10em; margin-left: 1em;">
+        <h3 class="card-title">My work</h3>
+  
+        <div class="row">
+          {%for repo in repos%}
+          <div class="card col-md-4" style="font-size: 80%; margin-top: 10px;">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img
+                src="{{repo.project_landing.url}}"
+                class="img-fluid"
+              />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{repo.name}}</h5>
+              <p class="card-text">
+                {{repo.about}}
+              </p>
+  
+            </div>
+            <hr style="color: brown;">
+            <a href="{{repo.project_link}}" target="_blank" class="btn btn-primary" style="background-color: brown; color: white; border: none; border-radius: 5px;">Visit site</a>
+          </div>
+          {%endfor%}
+         </div>
+      </div>
+        
+  
+      <!-- contact me -->
+  
+      <div id="contact" style="margin-top: 10em; margin-left: 1em;">
+        <h3 class="card-title">Reach out</h3>
+        {% include 'reachout_form.html' %}
+    </div>
+      
+  </div>
+
+
+  <div class="col-md-2"></div>
+</div>
+ {%endfor%} 
+{% endblock %}

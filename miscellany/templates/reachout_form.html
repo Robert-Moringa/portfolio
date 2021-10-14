@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+{% load bootstrap5 %} 
+{%load static%}
+
+{% block content %}
+{{block.super}}
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10 text-center">
+        <form  action="{%url 'home'%}" method="post" enctype="multipart/form-data" style="margin-bottom: 3em;">
+            {%csrf_token%}
+
+            {% bootstrap_form form%}
+            <input type="submit" style="background: none; border-radius: 10%;color: rgba(186, 83, 33, 1); border: solid 2px rgba(186, 83, 33, 1);" class="btn btn-sm" value="Contact me">
+        </form>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+
+
+ {% endblock %}

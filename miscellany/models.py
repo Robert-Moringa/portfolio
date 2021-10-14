@@ -9,11 +9,17 @@ class GithubRepo(models.Model):
     project_link=models.URLField(max_length=250)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
 class Skill(models.Model):
     class Meta:
         db_table = 'skills'
 
     name=models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
 
 class ContactMe(models.Model):
     class Meta:
@@ -25,6 +31,9 @@ class ContactMe(models.Model):
     email=models.EmailField()
     skills=models.ForeignKey(Skill, null=True, blank=True, on_delete=models.CASCADE, verbose_name='Which of my skills are you interested in?')
     pub_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
     
 class Myself(models.Model):
     class Meta:
@@ -37,3 +46,6 @@ class Myself(models.Model):
     edit_date = models.DateTimeField(auto_now_add=True)
     skills= models.ForeignKey(Skill, null=True, blank=True, on_delete=models.CASCADE)
     repos=models.ForeignKey(GithubRepo, null=True, blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
